@@ -33,6 +33,21 @@
           @error('Image')
             <p style="color: red;">{{ $message }}</p>
         @enderror
+
+        <div class="mb-3">
+          <label for="Merk" class="form-label">Merk</label>
+          <select name="Merk" id="Merk">
+            @forelse ($merks as $merk)
+                <option value="{{ $merk->id }}">{{ $merk->Merk }}</option>
+            @empty
+                <p>Data is empty.</p>
+            @endforelse
+          </select>
+        </div>
+        @error('Merk')
+          <p style="color: red;">{{ $message }}</p>
+      @enderror
+
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 

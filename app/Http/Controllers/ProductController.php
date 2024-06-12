@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Merk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,14 +17,16 @@ class ProductController extends Controller
     }
 
     function getCreateProduct() {
-        return view('createProduct');
+        $merks = Merk::all();
+        return view('createProduct', compact('merks'));
     }
 
     function storeProduct(Request $request) {
         $request->validate([
             'Name' => ['required', 'min:5'],
             'Price' => ['required', 'min:1'],
-            'Image' => ['required', 'image']
+            'Image' => ['required', 'image'],
+            'Merk' => 'required'
         ]);
 
         $now = now()->format('Y-m-d_H.i.s');
@@ -33,7 +36,8 @@ class ProductController extends Controller
         Product::create([
             'Name' => $request->Name,
             'Price' => $request->Price,
-            'Image' => $filename
+            'Image' => $filename,
+            'MerkId' => $request->Merk
         ]);
 
         return redirect('/home');

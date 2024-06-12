@@ -4,27 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Product extends Model
+class Shipment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'Name',
+        'Type',
         'Price',
-        'Image',
-        'MerkId'
+        'Estimation'
     ];
-
-    public function merk(): BelongsTo
-    {
-        return $this->belongsTo(Merk::class, 'MerkId');
-    }
 
     public function orders(): HasMany
     {
-        return $this->hasMany(Order::class, 'ProductId');
+        return $this->hasMany(Order::class, 'ShipmentId');
     }
 }

@@ -12,6 +12,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/create-product">Create Product</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('getAllOrders') }}">View Orders</a>
+          </li>
         </ul>
       </div>
     </div>
