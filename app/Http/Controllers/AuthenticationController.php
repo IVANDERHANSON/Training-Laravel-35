@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthenticationController extends Controller
 {
@@ -43,6 +45,9 @@ class AuthenticationController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            Cookie::queue('name', 'admin');
+            $message = auth()->user()->name.' telah melakukan login!';
+            Log::info($message);
             return redirect('/home');
         }
         return back()->withErrors([
@@ -56,6 +61,8 @@ class AuthenticationController extends Controller
         $request->session()->invalidate();
  
         $request->session()->regenerateToken();
+
+        Cookie::expire('name');
     
         return redirect('/home');
     }

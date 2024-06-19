@@ -12,6 +12,7 @@
 
     @if (Auth::check())
       Hello, {{ Auth::user()->name }}
+      <p>Name: {{ Cookie::get('name') }}</p>
     @endif
 
     @forelse ($products as $product)
