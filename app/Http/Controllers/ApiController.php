@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -9,10 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class ApiController extends Controller
 {
     function getProduct() {
-        $products = Product::all();
-        return [
-            'data' => $products
-        ];
+        return ProductResource::collection(Product::paginate(2));
     }
 
     function storeProduct(Request $request) {
