@@ -17,3 +17,4 @@ Route::post('/delete-product/{id}', [ApiController::class, 'deleteProduct'])->mi
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');

@@ -38,4 +38,9 @@ class UserController extends Controller
      
         return $user->createToken($user->email)->plainTextToken;
     }
+
+    function logout(Request $request) {
+        $request->user()->currentAccessToken()->delete();
+        return 'Logout success.';
+    }
 }
