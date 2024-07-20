@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\IsAdmin;
@@ -33,3 +34,5 @@ Route::get('/login', [AuthenticationController::class, 'getLogin'])->name('getLo
 Route::post('/store-register', [AuthenticationController::class, 'register'])->name('register');
 Route::post('/store-login', [AuthenticationController::class, 'login'])->name('login');
 Route::post('/logout', [AuthenticationController::class, 'logout'])->name('logout');
+
+Route::get('/send-mail', [MailController::class, 'sendMail']);

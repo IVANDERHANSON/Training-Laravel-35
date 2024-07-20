@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     function getHome() {
-        $products = Product::all();
+        $products = Product::paginate(1);
         return view('home', compact('products'));
     }
 
